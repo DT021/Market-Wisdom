@@ -4,10 +4,10 @@ from sklearn.utils import shuffle
 import numpy as np
 from os import path
 import quandl
-from keras.layers import LSTM, Dropout, Dense, Activation
-from keras import Sequential, callbacks
-from keras.layers import Conv1D, MaxPooling1D
-from keras.optimizers import RMSprop
+from tensorflow.keras.layers import LSTM, Dropout, Dense, Activation
+from tensorflow.keras import Sequential, callbacks
+from tensorflow.keras.layers import Conv1D, MaxPooling1D
+from tensorflow.keras.optimizers import RMSprop
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -19,7 +19,14 @@ from utilities import Constants
 from utilities.Utilities import Utilities
 
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
-quandl.ApiConfig.api_key = '__YOUR_KEY__'
+
+key_dir = "/Users/tianyudu/Documents/UToronto/Course/ECO499/quandl_api.txt"
+with open(key_dir, "r") as f:
+    key = f.readline()
+    key = key.replace("\n", "")
+
+print(key)
+quandl.ApiConfig.api_key = key
 
 
 def build_model(inputs, model_type):
